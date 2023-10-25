@@ -1,5 +1,5 @@
 """
-URL configuration for mmorpg project.
+URL configuration for bulletin_board project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -15,8 +15,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from board.views import WelcomeView
+from allauth.account.views import SignupView, LoginView, LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', WelcomeView,),
+    path('pages/', include('django.contrib.flatpages.urls')),
+    path('board/', include('board.urls')),
+    path('accounts/', include('allauth.urls')),
+    path('accounts/signup/', SignupView.as_view(), name='account_signup'),
+    path('accounts/login/', LoginView.as_view(), name='account_login'),
+    path('accounts/logout/', LogoutView.as_view(), name='account_logout'),
 ]

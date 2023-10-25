@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+     <h2>Здравствуй, {{ user }}.  </h2>
+    <hr>
+    <p> Ваш отклик на объявление с заголовком: {{response.responsePost.title}} принят!</p>
+    <p> Содержание: {{ response.text|truncatechars:20 }} </p>
+     <p> Ссылка на полный текст отклика:<a href="{{ link }}">здесь</a></p>
+    <hr>
+</body>
+</html>

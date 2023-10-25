@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Здравствуй, {{ user }}. Подборка объявлений за неделю! </h2>
+    <hr>
+
+    {% for post in posts %}
+            <p> Тема: {{ post.title }} </p>
+            <p> Содержание: {{ post.text|truncatechars:30 }} </p>
+            <p> Ссылка на полный текст статьи:<a href="http://127.0.0.1:8000/board/{{ post.id }}/">здесь</a></p>
+            <hr>
+    {% endfor %}
+
+</body>
+</html>

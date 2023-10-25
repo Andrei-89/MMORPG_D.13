@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>
+            {% block title %}
+            {% endblock title %}
+         </title>
+        <link href='{% static "css/styles.css" %}' rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+          
+        <header class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
+            <div class="container px-4">
+                {% if request.user.id == None %}
+                <a class="navbar-brand" href="/">Доска объявлений, Вы не зарегистрированы!</a>
+                {% else %}
+                <a class="navbar-brand" href="/">Доска объявлений, Вы зарегистрированы как {{ request.user }}</a>
+                {% endif %}
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="/board/">Объявления</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/board/private/">Личный кабинет</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/accounts/login">Регистрация/Авторизация</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/accounts/logout">Выход</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+     
+        <!-- Header-->
+      
+        <!-- About section-->
+        <section id="about">
+            <div class="container px-4">
+                <div class="row gx-4 justify-content-center">
+                    <div class="col-lg-8">
+                        <p> {% block content %} {% endblock content %} </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer-->
+        {% include 'board/layers/parts/footer.html' %}
+
+    </body>
+</html>

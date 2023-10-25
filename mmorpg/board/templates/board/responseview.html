@@ -1,0 +1,38 @@
+{% extends 'flatpages/default.html' %}
+
+{% block content %}
+  <p>Полный обзор отклика: </p>
+<hr>
+
+    {% if response %}
+        <table style="border:solid">
+            <tr style="border:solid">
+                <td style="border:solid">Объявление</td>
+                <td style="border:solid">Текст отклик</td>
+                <td style="border:solid">Автор отклика</td>
+                <td style="border:solid">Статус принятия отклика</td>
+            </tr>
+
+            <tr>
+                <td style="border:solid"> {{ response.responsePost }} </td>
+                <td style="border:solid"> {{ response.text }} </td>
+                <td style="border:solid"> {{ response.responseUser }} </td>
+
+                {% if response.accepted %}
+                    <td style="border:solid"> Принято </td>
+                {% else %}
+                    <td style="border:solid"> Не принято </td>
+                {% endif %}
+            </tr>
+
+        </table>
+
+    {% else %}
+    <h3>Что-то пошло не так!</h3>
+    {% endif %}
+<hr>
+<a href="{% url 'private_page' %}">Вернуться к списку откликов</a>
+
+{% endblock content %}
+</body>
+</html>

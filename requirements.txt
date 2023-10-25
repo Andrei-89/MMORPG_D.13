@@ -1,0 +1,26 @@
+Первый запуск
+
+установка откружения
+python3 -m venv venv
+
+активация
+source venv/bin/activate
+
+переход в директорию если надо
+cd
+
+установка модуля Django
+pip3 install django
+
+Фильтров
+python -m pip install django-filter
+
+Allauth для регистрации
+pip3 install django-allauth
+
+django_apscheduler - периодические задачи
+pip3 install django-apscheduler
+
+Для скрытия ключей
+pip3 install python-dotenv
+

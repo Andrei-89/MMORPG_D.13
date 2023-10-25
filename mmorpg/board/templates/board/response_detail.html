@@ -1,0 +1,26 @@
+{% extends 'flatpages/default.html' %}
+
+
+{% block content %}
+
+{% if response %}
+        <table style="border:solid">
+            <tr style="border:solid">
+                <td style="border:solid">Объявление</td>
+                <td style="border:solid">Пользователь</td>
+                <td style="border:solid">Текст</td>
+            </tr>
+
+            <tr>
+                <td style="border:solid"> {{ response.responsePost }} </td>
+                <td style="border:solid"> {{ response.responseUser }} </td>
+                <td style="border:solid"> {{ response.text }} </td>
+            </tr>
+        </table>
+    {% else %}
+    <h3>Отклика с номером {{ response.id }} нет!</h3>
+    {% endif %}
+<hr>
+<a href="{% url 'post_all' %}"><u> Вернуться к списку объявлений/ </u></a>
+
+{% endblock content %}

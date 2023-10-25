@@ -1,0 +1,52 @@
+{% extends 'flatpages/default.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+  <p>Всего размещено объявлений: {{ post_all|length }} </p>
+  <p>Для просмотра объявления нажмите на его заголовок. </p>
+<hr>
+
+    {% if post_all %}
+        <table style="border:solid">
+            <tr style="border:solid">
+                <td style="border:solid">Заголовок</td>
+                <td style="border:solid">Текст</td>
+                <td style="border:solid">Категория</td>
+                <td style="border:solid">Автор</td>
+                <td style="border:solid">Дата публикации</td>
+            </tr>
+
+            {% for post in post_all %}
+            <tr>
+                <td style="border:solid">
+                    <a href="{% url 'post_detail' post.id %}"><strong>{{ post.title }}</strong></a>
+              <br>
+                    <a href="{% url 'post_update' post.id %}"><u>Редактировать</u></a>
+                    <a href="{% url 'post_delete' post.id %}"><u> Удалить </u></a>
+                    <br>
+                    <a href="{% url 'response_create' %}?post_id={{ post.id }}"><u> Оставить отзыв </u></a>
+
+                </td>
+                <td style="border:solid"> {{ post.text }} </td>
+                <td style="border:solid"> {{ post.category }} </td>
+                <td style="border:solid"> {{ post.postUser }} </td>
+                <td style="border:solid"> {{ post.date|date:'d M Y' }} </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    {% else %}
+    <h3>Объявлений нет!</h3>
+    {% endif %}
+<hr>
+<a href="{% url 'post_create' %}">Добавить объявление</a> <br>
+
+{% endblock content %}
+</body>
+</html>

@@ -1,0 +1,36 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Объявление будет удалено:
+{% endblock title %}
+
+
+{% block content %}
+<h2>Вы действительно хотите удалить?</h2>
+
+     <table style="border:solid">
+            <tr style="border:solid">
+                <td style="border:solid">Заголовок</td>
+                <td style="border:solid">Текст</td>
+                <td style="border:solid">Категория</td>
+                <td style="border:solid">Автор</td>
+                <td style="border:solid">Дата публикации</td>
+            </tr>
+
+            <tr>
+                <td style="border:solid">
+                    {{ post.title }}
+                </td>
+                <td style="border:solid"> {{ post.text }} </td>
+                <td style="border:solid"> {{ post.category }} </td>
+                <td style="border:solid"> {{ post.postUser }} </td>
+                <td style="border:solid"> {{ post.date|date:'d M Y' }} </td>
+            </tr>
+        </table>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="submit" value="подтвердить">
+</form>
+
+{% endblock content %}

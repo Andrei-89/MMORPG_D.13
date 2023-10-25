@@ -1,0 +1,38 @@
+{% extends 'flatpages/default.html' %}
+
+
+{% block content %}
+
+{% if post_detail %}
+        <table style="border:solid">
+            <tr style="border:solid">
+                <td style="border:solid">Заголовок</td>
+                <td style="border:solid">Текст</td>
+                <td style="border:solid">Категория</td>
+                <td style="border:solid">Автор</td>
+                <td style="border:solid">Дата публикации</td>
+            </tr>
+
+            <tr>
+                <td style="border:solid">
+                    {{ post_detail.title }}
+              <br>
+                    <a href="{% url 'post_update' post_detail.id %}"><u>Редактировать</u></a>
+                    <a href="{% url 'post_delete' post_detail.id %}"><u> Удалить </u></a>
+                    <br>
+                    <a href="{% url 'response_create' %}?post_id={{ post_detail.id }}"><u> Оставить отзыв </u></a>
+
+                </td>
+                <td style="border:solid"> {{ post_detail.text }} </td>
+                <td style="border:solid"> {{ post_detail.category }} </td>
+                <td style="border:solid"> {{ post_detail.postUser }} </td>
+                <td style="border:solid"> {{ post_detail.date|date:'d M Y' }} </td>
+            </tr>
+        </table>
+    {% else %}
+    <h3>Новости с номером {{ post_detail.id }} нет!</h3>
+    {% endif %}
+<hr>
+<a href="{% url 'post_all' %}"><u> Вернуться к списку объявлений/ </u></a>
+
+{% endblock content %}

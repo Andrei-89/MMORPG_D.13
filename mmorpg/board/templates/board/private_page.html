@@ -1,0 +1,67 @@
+{% extends 'flatpages/default.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+  <p>Всего на сайте размещено откликов: {{ response_all|length }}.
+      <br> На этой странице для автора объявлений <strong>{{ request.user }} </strong> размещено {{ response_objs|length }} откликов. </p>
+<hr>
+<form method="GET">
+    {{ filter.form }} <!-- Форму от фильтров за нас сделает Django. А вот кнопку, увы, придётся делать самому -->
+    <input type="submit" value="Найти">
+</form>
+<hr>
+
+    {% if response_objs %}
+        <table style="border:solid">
+            <tr style="border:solid">
+                <td style="border:solid">Объявление</td>
+                <td style="border:solid">Текст отклик</td>
+                <td style="border:solid">Автор отклика</td>
+                <td style="border:solid">Статус принятия отклика</td>
+            </tr>
+
+            {% for response in filter.qs %}
+            {% for response_obj in response_objs %}
+            {% if response.pk == response_obj.pk %}
+            <tr>
+                <td style="border:solid"> {{ response.responsePost }} </td>
+                <td style="border:solid"> <a href="{% url 'responseview_page' %}?response_id={{ response.id }}">
+                    <strong>{{ response.text|truncatechars:20 }} </strong></a>
+                    <br>
+                    <a href="{% url 'response_delete' response.id %}"> Удалить отклик? </a>
+                </td>
+                <td style="border:solid"> {{ response.responseUser }} </td>
+
+                {% if response.accepted %}
+                    <td style="border:solid"> Принято
+                <br>
+                    <a href="{% url 'unaccepted_page' %}?response_id={{ response.id }}"  style="color:red">Отменить?</a>
+                        </td>
+                {% else %}
+                    <td style="border:solid"> Не принято
+                        <br>
+                    <a href="{% url 'accepted_page' %}?response_id={{ response.id }}" style="color:green">Принять?</a>
+                    </td>
+                {% endif %}
+            </tr>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+
+        </table>
+
+    {% else %}
+    <h3>Отзывов нет!</h3>
+    {% endif %}
+<hr>
+<a href="{% url 'post_all' %}">Вернуться к списку объявлений</a>
+
+{% endblock content %}
+</body>
+</html>
